@@ -1,6 +1,4 @@
-# danjam-backend
-
-# 숙소 예약 프로젝트: 단잠
+# 숙소 예약 프로젝트: 단잠 backend
 ## 프로젝트 설명
 이 프로젝트는 Airbnb를 벤치마킹하여 개발한 웹 애플리케이션입니다. React와 Spring Boot를 분리하여 프론트엔드와 백엔드를 각각 개발하며, 사용자가 쉽게 예약하고 관리할 수 있는 플랫폼을 구현합니다.
 
@@ -27,7 +25,7 @@
 
 ## 설치 방법
 
-### 1. **백엔드 (Spring Boot)**
+### **백엔드 (Spring Boot)**
 1. 레포지토리 클론하기:
    ```bash
    git clone https://github.com/kimdohee58/danjam-backend.git
@@ -42,34 +40,8 @@
    ```bash
    ./gradlew bootRun
 
-### 2. **프론트엔드 (React)**
-1. 레포지토리 클론하기:
-   ```bash
-   git clone https://github.com/kimdohee58/danjam-frontend.git
-2. 프로젝트 디렉토리로 이동:
-   ```bash
-   cd danjam-frontend
-3. 의존성 설치:
-   ```bash
-   npm install
-4. 서버 실행:
-   ```bash
-   npm start
-
-### 3. **캘린더 및 날짜 선택 기능 설치**
-1. react-calendar 설치:
-   ```bash
-   npm install react-calendar
-2. react-datepicker 설치:
-   ```bash
-   npm install react-datepicker
-3. date-fns 설치:
-   ```bash
-   npm install date-fns
-
 ## 사용법
 서버가 실행되면 웹 브라우저에서 아래 주소로 접속할 수 있습니다:
-- http://localhost:3000 (프론트엔드)
 - http://localhost:8080 (백엔드)
 
 ## 문의
