@@ -62,4 +62,5 @@ tasks.named('test') {
 
 tasks.named('bootJar') {
 	enabled = true // Spring Boot 애플리케이션 JAR 파일 생성
+	mainClass = 'com.danjam.DanjamApplication'
 }
