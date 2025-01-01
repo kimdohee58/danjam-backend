@@ -15,6 +15,7 @@ services:
       - danjam-network
 
   danjam-service:
+    build: .  # 현재 디렉터리에서 Dockerfile을 사용해 빌드
     container_name: danjam-service
     image: kimdohee58/danjam-service:latest
     ports:
@@ -33,6 +34,8 @@ services:
       "
     networks:
       - danjam-network
+    volumes:
+      - .:/back-main  # 애플리케이션 소스와 데이터를 컨테이너와 동기화
 
 volumes:
   mysql-data-danjam:  # MySQL 데이터 저장소
