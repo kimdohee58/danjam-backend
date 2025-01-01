@@ -16,11 +16,9 @@ services:
     image: kimdohee58/danjam-service:latest
     ports:
       - "9010:9010"  # 호스트와 컨테이너의 포트를 매핑
-    depends_on:
-      - danjam-mysql  # mysql 서비스가 먼저 실행되어야 함
     environment:
       DB_HOST: danjam-mysql  # MySQL 호스트 이름 설정 (서비스 이름과 동일하게)
-    entrypoint: ["./wait-for-it.sh", "danjam-mysql:3306", "--", "java", "-jar", "/danjam-backend.jar"]
+    entrypoint: ["dockerize", "-wait", "tcp://danjam-mysql:3306", "-timeout", "30s", "java", "-jar", "/danjam-backend.jar"]
 
 volumes:
   mysql-data-danjam:  # MySQL 데이터 저장소
