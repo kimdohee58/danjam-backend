@@ -11,7 +11,7 @@
 # Build 단계
 FROM openjdk:17-jdk-slim as build
 
-WORKDIR /danjam-backend
+WORKDIR /back-main
 
 # Gradle Wrapper 및 설정 파일 복사
 COPY gradle/ gradle/
@@ -28,10 +28,10 @@ RUN ./gradlew clean bootJar
 # 배포 단계
 FROM openjdk:17-jdk-slim
 
-WORKDIR /app
+WORKDIR /back-main
 
 # 빌드된 JAR 파일 복사
-COPY --from=build /app/build/libs/*.jar danjam-backend.jar
+COPY --from=build /back-main/build/libs/*.jar danjam-backend.jar
 
 # 실행 명령
 CMD ["java", "-jar", "danjam-backend.jar"]
