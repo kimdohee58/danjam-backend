@@ -1,8 +1,0 @@
-# Dockerfile.mysql
-FROM mysql:latest
-
-# 기본 설정값 추가
-ENV MYSQL_ROOT_PASSWORD=danjam1234
-ENV MYSQL_DATABASE=danjamdb
-
-CMD ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
