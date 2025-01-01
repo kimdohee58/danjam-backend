@@ -15,6 +15,12 @@ pipeline {
             }
         }
 
+        stage('Build JAR') {
+            steps {
+                sh './gradlew clean bootJar'
+            }
+        }
+
         stage('Docker Login') {
             steps {
                 script {

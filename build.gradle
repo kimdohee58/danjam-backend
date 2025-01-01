@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.danjam'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	toolchain {
@@ -60,6 +60,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-bootJar {
-	mainClass = 'com.danjam.DanjamApplication'  // 메인 클래스 이름을 지정하세요
+tasks.named('bootJar') {
+	enabled = true // Spring Boot 애플리케이션 JAR 파일 생성
 }
