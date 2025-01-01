@@ -16,6 +16,7 @@ public class Tag {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 30)
     private String name;
 
     private String PN;

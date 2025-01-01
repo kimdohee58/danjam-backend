@@ -7,6 +7,7 @@ import com.danjam.payment.PaymentResponse;
 import com.danjam.room.Room;
 import com.danjam.room.RoomResponse;
 import com.danjam.users.Users;
+import com.danjam.users.UsersResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

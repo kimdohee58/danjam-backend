@@ -21,9 +21,9 @@ public class RoomImg {
 
     @Column(name = "name_original")
     private String nameOriginal;
-
+    @Column(length = 45)
     private String size;
-
+    @Column(length = 10)
     private String ext;
 
     @ManyToOne(fetch = FetchType.LAZY)

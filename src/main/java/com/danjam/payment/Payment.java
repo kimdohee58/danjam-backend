@@ -18,12 +18,15 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 200)
     private String paymentKey;
 
+    @Column(length = 64)
     private String orderId;
 
     private int totalAmount;
 
+    @Column(length = 45)
     private String status;
 
     private LocalDateTime approvedAt;

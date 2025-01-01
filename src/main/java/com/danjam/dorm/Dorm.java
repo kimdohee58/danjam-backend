@@ -24,13 +24,16 @@ public class Dorm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 100)
     private String name;
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @Column(name = "contact_num", length = 13, nullable = true)
     private String contactNum;
-
+    @Column(length = 10)
     private String city;
+    @Column(length = 10)
     private String town;
     private String address;
 
@@ -42,7 +45,7 @@ public class Dorm {
     @JoinColumn(name = "seller_id")
     private Users user;
 
-    @ColumnDefault("N")
+    @ColumnDefault("'N'")
     private String status;
 
     @OneToMany(mappedBy = "dorm", cascade = CascadeType.ALL, orphanRemoval = true)

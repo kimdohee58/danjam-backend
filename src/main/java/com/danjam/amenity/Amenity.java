@@ -14,6 +14,7 @@ public class Amenity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 댓글 고유
 
+    @Column(length = 50)
     private String name;
 
     @Builder

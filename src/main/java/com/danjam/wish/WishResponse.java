@@ -3,6 +3,7 @@ package com.danjam.wish;
 import com.danjam.dorm.Dorm;
 import com.danjam.dorm.DormResponse;
 import com.danjam.users.Users;
+import com.danjam.users.UsersResponse;
 import lombok.*;
 
 @Getter

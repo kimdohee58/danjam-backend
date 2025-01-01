@@ -23,18 +23,18 @@ public class Users {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", length = 30, nullable = false)
     private String email;
 
     @Setter
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", length = 45, nullable = false)
     private String name;
 
     @Setter
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", length = 11, nullable = false)
     private int phoneNum;
 
     @Enumerated(EnumType.STRING) // enumtype.string 옵션 사용하면 enum 이름 그대로 db에 저장
@@ -49,8 +49,7 @@ public class Users {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @Column(name = "status")
-    @ColumnDefault("Y")
+    @ColumnDefault("'Y'")
     private String status;
 
     public Users(String email, String password) {

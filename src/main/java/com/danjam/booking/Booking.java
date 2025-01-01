@@ -34,8 +34,6 @@ public class Booking {
     @JsonBackReference
     private Room room;
 
-
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id", unique = true)
     private Payment payment;
@@ -48,7 +46,7 @@ public class Booking {
     @Column(name = "check_out")
     private LocalDateTime checkOut;
 
-    @ColumnDefault("N")
+    @ColumnDefault("'N'")
     private String status;
   
     @Builder

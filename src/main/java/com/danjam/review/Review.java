@@ -19,7 +19,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    @Lob
     private String content;
     private double rate;
     @ManyToOne(fetch = FetchType.LAZY)

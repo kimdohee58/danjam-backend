@@ -59,3 +59,7 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	mainClass = 'com.danjam.DanjamApplication'  // 메인 클래스 이름을 지정하세요
+}

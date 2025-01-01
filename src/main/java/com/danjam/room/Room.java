@@ -24,10 +24,13 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 100)
     private String name;
+    @Lob
     private String description;
     private int person;
     private int price;
+    @Column(length = 10)
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
