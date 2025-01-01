@@ -19,6 +19,9 @@ COPY gradlew .
 COPY build.gradle .
 COPY settings.gradle .
 
+# gradlew에 실행 권한 부여
+RUN chmod +x gradlew
+
 # Gradle 종속성 캐시 생성 및 JAR 파일 빌드
 RUN ./gradlew clean bootJar
 
