@@ -8,41 +8,30 @@
 #ENTRYPOINT ["java", "-jar", "/danjam-backend.jar"]
 
 
-# OpenJDK 17을 사용하는 공식 이미지를 기반으로 합니다.
+# Build 단계
 FROM openjdk:17-jdk-slim as build
 
-# 작업 디렉토리 설정
-WORKDIR /app
+WORKDIR /danjam-backend
 
-# Gradle Wrapper 및 설정 파일 복사 (캐시 활용)
+# Gradle Wrapper 및 설정 파일 복사
 COPY gradle/ gradle/
 COPY gradlew .
 COPY build.gradle .
 COPY settings.gradle .
 
-# Gradle 종속성 캐시 생성
-RUN ./gradlew dependencies
-
-# 프로젝트의 모든 파일 복사
-COPY . .
-
-# Gradle 빌드 실행 (clean 및 bootJar)
+# Gradle 종속성 캐시 생성 및 JAR 파일 빌드
 RUN ./gradlew clean bootJar
 
-# 실제 실행용 이미지 생성
+# 배포 단계
 FROM openjdk:17-jdk-slim
 
-# 실행용 사용자 생성
-RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+WORKDIR /app
 
 # 빌드된 JAR 파일 복사
-COPY --from=build /app/build/libs/*.jar /danjam-backend.jar
+COPY --from=build /app/build/libs/*.jar danjam-backend.jar
 
-# 사용자 설정
-USER appuser
-
-# 컨테이너 실행 시 JAR 파일 실행
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-Xms512m", "-Xmx1024m", "-jar", "/danjam-backend.jar"]
+# 실행 명령
+CMD ["java", "-jar", "danjam-backend.jar"]
 
 
 
