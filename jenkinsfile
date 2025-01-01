@@ -59,11 +59,12 @@ pipeline {
             }
         }
 
-        stage('Run Docker Compose') {
+        stage('Build and Run Docker Containers') {
             steps {
                 script {
+                    sh 'docker-compose down || true'
                     // Docker Compose 실행
-                    sh "docker-compose up -d"
+                    sh "docker-compose up --build -d"
                 }
             }
         }

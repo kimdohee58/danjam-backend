@@ -1,27 +1,27 @@
 version: '3'
 
 services:
+  danjam-mysql:
+    container_name: danjam-mysql
+    image: kimdohee58/danjam-mysql:latest  # 원하는 MySQL 버전을 사용
+    volumes:
+      - mysql-data-danjam:/var/lib/mysql  # 데이터를 호스트에 저장
+    environment:
+      MYSQL_ROOT_PASSWORD: danjam1234  # MySQL 루트 비밀번호 설정
+      MYSQL_DATABASE: danjamdb  # 기본 데이터베이스 설정
+    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+    ports:
+      - "3306:3306"  # MySQL 포트 매핑
+
   danjam-service:
-    container_name: danjam
+    container_name: danjam-service
     image: kimdohee58/danjam-service:latest
     ports:
       - "9010:9010"  # 호스트와 컨테이너의 포트를 매핑
     depends_on:
-      - mysql-danjam  # mysql 서비스가 먼저 실행되어야 함
+      - danjam-mysql  # mysql 서비스가 먼저 실행되어야 함
     environment:
-      DB_HOST: mysql  # MySQL 호스트 이름 설정 (서비스 이름과 동일하게)
-
-  mysql-danjam:
-    container_name: mysql-danjam
-    image: mysql:latest  # 원하는 MySQL 버전을 사용
-    volumes:
-      - mysql-data-danjam:/var/lib/mysql  # 데이터를 호스트에 저장
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234  # MySQL 루트 비밀번호 설정
-      MYSQL_DATABASE: 5danjam  # 기본 데이터베이스 설정
-    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
-    ports:
-      - "3306:3306"  # MySQL 포트 매핑
+      DB_HOST: danjam-mysql  # MySQL 호스트 이름 설정 (서비스 이름과 동일하게)
 
 volumes:
   mysql-data-danjam:  # MySQL 데이터 저장소
