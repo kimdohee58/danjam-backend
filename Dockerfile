@@ -33,6 +33,9 @@ WORKDIR /back-main
 # 빌드된 JAR 파일 복사
 COPY --from=build /back-main/build/libs/danjam-1.0.0.jar /danjam-backend.jar
 
+# JAR 파일 내부 클래스 경로 확인 (확인용)
+RUN jar tf /danjam-backend.jar | grep com/danjam/DanjamApplication
+
 # 실행 명령
 #CMD ["java", "-jar", "/danjam-backend.jar"]
 ENTRYPOINT ["java", "-jar", "/danjam-backend.jar"]
