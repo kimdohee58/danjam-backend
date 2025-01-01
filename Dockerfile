@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y wget && \
     wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz && \
     tar -xvzf dockerize-linux-amd64-v0.6.1.tar.gz && \
     mv dockerize /usr/local/bin/ && \
+    chmod +x /usr/local/bin/dockerize && \
     rm dockerize-linux-amd64-v0.6.1.tar.gz
 
 # JAR 파일을 Docker 이미지로 복사
