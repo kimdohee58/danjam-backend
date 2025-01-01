@@ -9,15 +9,15 @@ pipeline {
         stage('Checkout Source') {
             steps {
                 script {
-                    // Git 소스 코드 체크아웃
-                    checkout scm
+                    // Git 소스 코드 명시적으로 체크아웃
+                    git branch: 'main', url: 'https://github.com/kimdohee58/danjam-backend.git'
                 }
             }
         }
 
         stage('Build JAR') {
             steps {
-                sh './gradlew clean bootJar'
+                powershell './gradlew clean bootJar'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     // Docker Hub 로그인
                     withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh """
+                        powershell """
                             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                         """
                     }
@@ -42,7 +42,7 @@ pipeline {
                     echo "Building Docker image with tag: ${imageTag}"
 
                     // Docker 이미지 빌드
-                    sh "docker build -t ${DOCKER_USER}/danjam-service:${BUILD_NUMBER} ."
+                    powershell "docker build -t ${DOCKER_USER}/danjam-service:${BUILD_NUMBER} ."
                 }
             }
         }
@@ -51,10 +51,10 @@ pipeline {
             steps {
                 script {
                     def imageTag = "danjam-service:${BUILD_NUMBER}"
-                    echo "Pushing Docker image: ${imageTag}"
+                    echo "Push Docker image: ${imageTag}"
 
                     // Docker 이미지 푸시
-                    sh "docker push ${DOCKER_USER}/danjam-service:${BUILD_NUMBER}"
+                    powershell "docker push ${DOCKER_USER}/danjam-service:${BUILD_NUMBER}"
                 }
             }
         }
@@ -62,9 +62,9 @@ pipeline {
         stage('Build and Run Docker Containers') {
             steps {
                 script {
-                    sh 'docker-compose down || true'
+                    powershell 'docker-compose down || true'
                     // Docker Compose 실행
-                    sh "docker-compose up --build -d"
+                    powershell "docker-compose up --build -d"
                 }
             }
         }
