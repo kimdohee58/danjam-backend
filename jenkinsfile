@@ -30,22 +30,6 @@ pipeline {
             }
         }
 
-//         stage('Build Docker Image') {
-//             steps {
-//                 script {
-//                     // 버전 태그 생성
-//                     def imageTag = "danjam-service:${BUILD_NUMBER}"
-//                     echo "Building Docker image with tag: ${imageTag}"
-//
-//                     // Docker 이미지 빌드
-//                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-//                         powershell "docker build -t "$DOCKER_USER"/danjam-service:latest -f ./Dockerfile"
-//                         powershell "docker tag "$DOCKER_USER"/danjam-service:latest "$DOCKER_USER"/danjam-service:${BUILD_NUMBER}"
-//                     }
-//                 }
-//             }
-//         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -55,8 +39,7 @@ pipeline {
 
                     // Docker 이미지 빌드
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        powershell "docker build -t ${DOCKER_USER}/danjam-service:latest -f ./Dockerfile ."
-                        powershell "docker tag ${DOCKER_USER}/danjam-service:latest ${DOCKER_USER}/danjam-service:${BUILD_NUMBER}"
+                        powershell "docker build -t ${DOCKER_USER}/danjam-service:${BUILD_NUMBER} -f ./Dockerfile ."
                     }
                 }
             }
@@ -70,8 +53,15 @@ pipeline {
 
                     // Docker 이미지 푸시
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    powershell "docker push "$DOCKER_USER"/danjam-service:${BUILD_NUMBER}"
-                                        }
+                        powershell """
+                            docker push ${DOCKER_USER}/danjam-service:${BUILD_NUMBER}
+                        """
+                    }
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+                         powershell """
+                             echo docker push ${DOCKER_USER}/danjam-service:${BUILD_NUMBER}
+                         """
+                     }
                 }
             }
         }
