@@ -35,4 +35,4 @@ COPY --from=build /back-main/build/libs/danjam-1.0.0.jar /back-main/danjam-backe
 
 # 실행 명령
 #CMD ["java", "-jar", "/back-main/danjam-backend.jar"]
-ENTRYPOINT ["java", "-jar", "/danjam-backend.jar"]
+ENTRYPOINT ["java", "-jar", "/back-main/danjam-backend.jar"]
