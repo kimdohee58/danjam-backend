@@ -31,10 +31,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /back-main
 
 # 빌드된 JAR 파일 복사
-COPY --from=build /back-main/build/libs/*.jar danjam-backend.jar
+COPY --from=build /back-main/build/libs/*.jar /danjam-1.0.0.jar
 
 # 실행 명령
-CMD ["java", "-jar", "danjam-backend.jar"]
+CMD ["java", "-jar", "/danjam-1.0.0.jar"]
 
 
 
