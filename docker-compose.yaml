@@ -3,24 +3,24 @@ version: '3'
 services:
   danjam-service:
     image: kimdohee58/danjam-service:latest
-    container_name: danjam-service
+    container_name: danjam
     ports:
       - "9010:9010"  # 호스트와 컨테이너의 포트를 매핑
     depends_on:
-      - mysql  # mysql 서비스가 먼저 실행되어야 함
+      - mysql-danjam  # mysql 서비스가 먼저 실행되어야 함
     environment:
       DB_HOST: mysql  # MySQL 호스트 이름 설정 (서비스 이름과 동일하게)
 
-  mysql:
+  mysql-danjam:
     image: mysql:latest  # 원하는 MySQL 버전을 사용
-    container_name: mysql
+    container_name: mysql-danjam
     environment:
       MYSQL_ROOT_PASSWORD: 1234  # MySQL 루트 비밀번호 설정
       MYSQL_DATABASE: 5danjam  # 기본 데이터베이스 설정
     ports:
       - "3306:3306"  # MySQL 포트 매핑
     volumes:
-      - mysql-data:/var/lib/mysql  # 데이터를 호스트에 저장
+      - mysql-data-danjam:/var/lib/mysql  # 데이터를 호스트에 저장
 
 volumes:
-  mysql-data:  # MySQL 데이터 저장소
+  mysql-data-danjam:  # MySQL 데이터 저장소
