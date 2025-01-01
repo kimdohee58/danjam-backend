@@ -31,27 +31,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /back-main
 
 # 빌드된 JAR 파일 복사
-COPY --from=build /back-main/build/libs/*.jar /danjam-1.0.0.jar
+COPY --from=build /back-main/build/libs/danjam-1.0.0.jar /danjam-1.0.0.jar
 
 # 실행 명령
 CMD ["java", "-jar", "/danjam-1.0.0.jar"]
-
-
-
-## OpenJDK 17을 사용하는 공식 이미지를 기반으로 합니다.
-#FROM openjdk:17-jdk-slim
-#
-## dockerize 바이너리를 다운로드하여 Docker 이미지에 포함
-#RUN apt-get update && apt-get install -y wget && \
-#    wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz && \
-#    tar -xvzf dockerize-linux-amd64-v0.6.1.tar.gz && \
-#    mv dockerize /usr/local/bin/ && \
-#    chmod +x /usr/local/bin/dockerize && \
-#    rm dockerize-linux-amd64-v0.6.1.tar.gz
-#
-## JAR 파일을 Docker 이미지로 복사
-#COPY build/libs/danjam-1.0.0.jar /danjam-backend.jar
-#
-## MySQL 준비되기 전까지 대기
-## dockerize 명령어로 MySQL이 준비될 때까지 기다립니다.
-#ENTRYPOINT ["dockerize", "-wait", "tcp://danjam-mysql:3306", "-timeout", "30s", "java", "-jar", "/danjam-backend.jar"]
