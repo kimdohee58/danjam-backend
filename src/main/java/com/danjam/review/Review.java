@@ -30,21 +30,19 @@ public class Review {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @Column(name = "created_at")
     @CreationTimestamp
-    private LocalDateTime createAt;
+    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
     @UpdateTimestamp
-    private LocalDateTime updateAt;
+    @Column(name = "updated_at", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updatedAt;
 
     @Builder
-    public Review(String content, double rate, Users users, Booking booking, LocalDateTime createAt, LocalDateTime updateAt) {
+    public Review(String content, double rate, Users users, Booking booking) {
         this.content = content;
         this.rate = rate;
         this.users = users;
         this.booking = booking;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
     }
 }

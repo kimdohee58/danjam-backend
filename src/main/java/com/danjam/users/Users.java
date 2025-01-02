@@ -41,12 +41,12 @@ public class Users {
     @Column(name = "role", nullable = true)
     private Role role;
 
-    @Column(name = "created_at")
     @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createAt;
 
-    @Column(name = "updated_at")
     @UpdateTimestamp
+    @Column(name = "updated_at", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updateAt;
 
     @ColumnDefault("'Y'")

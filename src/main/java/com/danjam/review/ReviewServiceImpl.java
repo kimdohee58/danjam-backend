@@ -57,8 +57,8 @@ public class ReviewServiceImpl  {
                 review.getContent(),
                 review.getBooking().getUsers(),
                 review.getBooking(),
-                review.getCreateAt(),
-                review.getUpdateAt()
+                review.getCreatedAt(),
+                review.getUpdatedAt()
         );
     }
 //    public Slice<ReviewDto> findReviewsByDormId(Long id, Pageable pageable) {

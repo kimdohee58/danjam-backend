@@ -4,6 +4,10 @@ import com.danjam.amenity.Amenity;
 import com.danjam.dorm.Dorm;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -22,6 +26,14 @@ public class Damenity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dorm_id")
     private Dorm dorm; // 판매자
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updatedAt;
 
 
     @Builder

@@ -26,8 +26,6 @@ public class ReviewDto {
                 .content(content)
                 .users(users)
                 .booking(booking)
-                .createAt(createdAt)
-                .updateAt(updatedAt)
                 .build();
     }
 }
