@@ -23,7 +23,7 @@ public class Users {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "email", length = 30, nullable = false)
+    @Column(name = "email", unique = true, length = 30, nullable = false)
     private String email;
 
     @Setter
