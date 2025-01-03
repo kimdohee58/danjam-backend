@@ -12,10 +12,11 @@ import java.util.List;
 
 @Repository
 public class UsersRepositoryCustomImpl implements  UsersRepositoryCustom{
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
     private final QUsers users = QUsers.users;
 
-    public UsersRepositoryCustomImpl() {
+    public UsersRepositoryCustomImpl(JPAQueryFactory queryFactory) {
+        this.queryFactory = queryFactory;
     }
 
     @Override

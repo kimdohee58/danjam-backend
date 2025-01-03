@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("validate")
     public ResponseEntity<?> validate(@RequestBody String email) {
-        /*HashMap<String, Object> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         // 값 이상하게 넘어와서 replace 해줌
         email = email.replace("%40", "@");
         email = email.replace("=", "");
@@ -41,30 +41,34 @@ public class UserController {
             resultMap.put("result", "success");
         } else {
             resultMap.put("result", "fail");
-        }*/
-        return ResponseEntity.ok(usersService.findByEmail(email));
+        }
+        return ResponseEntity.ok(resultMap);
+//        return ResponseEntity.ok(usersService.findByEmail(email));
     }
 
     @PostMapping("signUp")
     public ResponseEntity<Object> signUp(@RequestBody UsersDto usersDto) {
-        /*HashMap<String, Object> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         System.out.println("회원가입 접속");
 
         try{
             usersDto.setPassword(passwordEncoder.encode(usersDto.getPassword()));
             System.out.println("회원가입 성공");
-            usersService.save(usersDto.toEntity());
+            System.out.println("UserDto" + usersDto);
+            usersService.save(usersDto.toEntity(usersDto));
             resultMap.put("result", "success");
         }catch (Exception e) {
             e.printStackTrace();
             resultMap.put("result", "fail");
-        }*/
-        return ResponseEntity.ok(usersService.save(usersDto));
+        }
+
+        return ResponseEntity.ok(resultMap);
+//        return ResponseEntity.ok(usersService.save(usersDto));
     }
 
     @RequestMapping("authSuccess")
     public ResponseEntity<?> authSuccess(@AuthenticationPrincipal UserDetail userDetail) {
-        /*HashMap<String, Object> response = new HashMap<>();
+        HashMap<String, Object> response = new HashMap<>();
         Users user = userDetail.getUser();
 
         response.put("result", "success");
@@ -72,54 +76,58 @@ public class UserController {
         response.put("name", user.getName());
         response.put("email", user.getEmail());
         response.put("phoneNum", user.getPhoneNum());
-        response.put("role", user.getRole());*/
-        return ResponseEntity.ok(userDetail.getUser());
+        response.put("role", user.getRole());
+
+        return ResponseEntity.ok(response);
+//        return ResponseEntity.ok(userDetail.getUser());
     }
 
     @RequestMapping("authFailure")
     public ResponseEntity<?> authFailure() {
-        /*HashMap<String, Object> response = new HashMap<>();
+        HashMap<String, Object> response = new HashMap<>();
 
-        response.put("result", "fail");*/
-        return ResponseEntity.ok("fail");
+        response.put("result", "fail");
+        return ResponseEntity.ok(response);
+//        return ResponseEntity.ok("fail");
     }
 
     @RequestMapping("logoutSuccess")
     public ResponseEntity<?> logoutSuccess() {
-        /*HashMap<String, Object> response = new HashMap<>();
+        HashMap<String, Object> response = new HashMap<>();
 
-        response.put("result", "success");*/
-        return ResponseEntity.ok("success");
+        response.put("result", "success");
+        return ResponseEntity.ok(response);
+//        return ResponseEntity.ok("success");
     }
 
     @GetMapping
     public ResponseEntity<List<?>> findAll() {
-        /*List<UsersDto> users = usersRepository.findAll()
+        List<UsersDto> users = usersService.findAll()
                 .stream()
                 .map(UsersDto::fromEntity)
                 .toList();
 
-        return new ResponseEntity<>(users, HttpStatus.OK);*/
-        return ResponseEntity.ok(usersService.findAll());
+        return new ResponseEntity<>(users, HttpStatus.OK);
+//        return ResponseEntity.ok(usersService.findAll());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-//        Users findByUser = usersService.findById(id);
-//        if (findByUser == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//
-//        UsersDto user = UsersDto.fromEntity(findByUser);
-//
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-        return ResponseEntity.ok(usersService.findById(id));
+        Users findByUser = usersService.findById(id);
+        if (findByUser == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        UsersDto user = UsersDto.fromEntity(findByUser);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+//        return ResponseEntity.ok(usersService.findById(id));
     }
 
     @Transactional
     @PatchMapping("{id}")
     public ResponseEntity<?> changePassword(@PathVariable Long id, @RequestBody Map<String, String> requestMap) {
-        /*Users findByUser = usersService.findById(id);
+        Users findByUser = usersService.findById(id);
         if (findByUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -128,8 +136,8 @@ public class UserController {
         usersService.save(findByUser);
         UsersDto user = UsersDto.fromEntity(findByUser);
 
-        return new ResponseEntity<>(user, HttpStatus.OK);*/
-        return ResponseEntity.ok(usersService.findById(id));
+        return new ResponseEntity<>(user, HttpStatus.OK);
+//        return ResponseEntity.ok(usersService.findById(id));
     }
 
     @Transactional
@@ -141,7 +149,7 @@ public class UserController {
         }
 
         findByUser.setPhoneNum(requestMap.get("phoneNum"));
-        usersService.save(UsersDto.fromEntity(findByUser));
+        usersService.save(findByUser);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -161,9 +169,9 @@ public class UserController {
 
     @GetMapping("UsersList")
     public ResponseEntity<List<?>> findUsersList() {
-        /*List<Users> userList = usersService.findUsersList();
+        List<Users> userList = usersService.findAll();
 
-        return new ResponseEntity<>(userList, HttpStatus.OK);*/
-        return ResponseEntity.ok(usersService.findAll());
+        return new ResponseEntity<>(userList, HttpStatus.OK);
+//        return ResponseEntity.ok(usersService.findAll());
     }
 }

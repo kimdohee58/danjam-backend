@@ -22,21 +22,20 @@ public class UsersDto {
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
-    public Users toEntity() {
+    public Users toEntity(UsersDto dto) {
         return Users.builder()
-                .id(id)
-                .email(email)
-                .password(password)
-                .name(name)
-                .phoneNum(phoneNum)
-                .role(role)
-                .status(status)
+                .id(dto.getId())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .name(dto.getName())
+                .phoneNum(dto.getPhoneNum())
+                .role(Role.ROLE_USER)
                 .createAt(createAt)
                 .updateAt(updateAt)
                 .build();
     }
 
-    public static UsersDto fromEntity(final Users user) {
+    public static UsersDto fromEntity(Users user) {
         return UsersDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())

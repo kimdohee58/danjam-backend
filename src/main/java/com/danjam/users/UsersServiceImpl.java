@@ -1,6 +1,7 @@
 package com.danjam.users;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,8 +16,8 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
 
     @Override
-    public Users save(UsersDto users) {
-        return usersRepository.save(users.toEntity());
+    public Users save(Users users) {
+        return usersRepository.save(users);
     }
 
     @Override

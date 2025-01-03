@@ -41,7 +41,7 @@ public class SecurityConfig {
                 // Configure form login
                 .formLogin(form -> form
                         .loginPage("/login")  // Frontend login page URL
-                        .loginProcessingUrl("/users/auth")  // URL to process login
+//                        .loginProcessingUrl("/users/auth")  // URL to process login
                         .successForwardUrl("/users/authSuccess")
                         .failureForwardUrl("/users/authFailure")
                         .permitAll()

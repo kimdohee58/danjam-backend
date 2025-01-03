@@ -16,11 +16,11 @@ import java.util.*;
 public class SearchController {
     private final SearchService searchService;
 
+//    @PostMapping("/town/list")
+//    public ResponseEntity<List<?>> showTownList(@RequestBody SearchDto searchDto) {
+//        return ResponseEntity.ok(searchService.findByCity(searchDto.getCity()));
+//    }
     @PostMapping("/town/list")
-    public ResponseEntity<List<?>> showTownList(@RequestBody SearchDto searchDto) {
-        return ResponseEntity.ok(searchService.findByCity(searchDto.getCity()));
-    }
-    /*@PostMapping("/town/list")
     public ResponseEntity<Map<?, ?>> showTownList(@RequestBody SearchDto searchDto) {
         Map<String, Object> resultMap = new HashMap();
         List<String> list = searchService.findByCity(searchDto.getCity());
@@ -35,7 +35,7 @@ public class SearchController {
             resultMap.put("townList", list);
         }
         return ResponseEntity.ok(resultMap);
-    }*/
+    }
 
     /*@GetMapping("/showAll")
     public ResponseEntity<Map<?, ?>> getDorms(Pageable pageable) {
