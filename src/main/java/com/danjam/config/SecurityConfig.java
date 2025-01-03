@@ -41,15 +41,15 @@ public class SecurityConfig {
                 // Configure form login
                 .formLogin(form -> form
                         .loginPage("/login")  // Frontend login page URL
-//                        .loginProcessingUrl("/users/auth")  // URL to process login
-                        .successForwardUrl("/users/authSuccess")
-                        .failureForwardUrl("/users/authFailure")
+                        .loginProcessingUrl("/api/users/auth")  // URL to process login
+                        .successForwardUrl("/api/users/authSuccess")
+                        .failureForwardUrl("/api/users/authFailure")
                         .permitAll()
                 )
                 // Configure logout
                 .logout(logout -> logout
-                        .logoutUrl("/users/logout")
-                        .logoutSuccessUrl("/users/logoutSuccess")
+                        .logoutUrl("/api/users/logout")
+                        .logoutSuccessUrl("/api/users/logoutSuccess")
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
                 );
